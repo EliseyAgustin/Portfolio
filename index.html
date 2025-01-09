@@ -12,81 +12,74 @@
     <div class="container">
         <header>
             <h1 class="glitch" data-text="Agustin Elisey Larco">Agustin Elisey Larco</h1>
-            <p class="subtitle">Computer Science | Web Technologies | QA Manual</p>
+            <p class="subtitle" data-translate="subtitle">Computer Science | Web Technologies | QA Manual</p>
             <div class="social-links">
-                <a href="www.linkedin.com/in/agustinelisey" target="_blank" class="btn btn-social">
+                <a href="https://www.linkedin.com/in/agustinelisey" target="_blank" class="btn btn-social">
                     <i class="fab fa-linkedin"></i> LinkedIn
                 </a>
                 <a href="https://github.com/EliseyAgustin" target="_blank" class="btn btn-social">
                     <i class="fab fa-github"></i> GitHub
                 </a>
                 <a href="documents/Curriculum.pdf" download class="btn btn-download">
-                    <i class="fas fa-download"></i> Download CV
+                    <i class="fas fa-download"></i> <span data-translate="downloadCV">Download CV</span>
                 </a>
             </div>
         </header>
         
         <nav>
             <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about" data-translate="about">About</a></li>
+                <li><a href="#skills" data-translate="skills">Skills</a></li>
+                <li><a href="#projects" data-translate="projects">Projects</a></li>
+                <li><a href="#contact" data-translate="contact">Contact</a></li>
             </ul>
         </nav>
         
         <main>
             <section id="about">
-                <h2>About Me</h2>
-                <p>I'm a passionate student with a Bachelor's in Computer Science and a University Degree in Web Technologies. Currently, I'm pursuing a career in QA Manual testing to ensure top-notch software quality. With a keen eye for detail and a love for problem-solving, I strive to contribute to the development of robust and user-friendly applications.</p>
-                <p>My academic background has equipped me with a strong foundation in various programming languages and web technologies. I'm constantly learning and adapting to new technologies to stay at the forefront of the ever-evolving tech landscape.</p>
+                <h2 data-translate="aboutMe">About Me</h2>
+                <p data-translate="aboutText1">I'm a passionate student with a Bachelor's in Computer Science and a University Degree in Web Technologies. Currently, I'm pursuing a career in QA Manual testing to ensure top-notch software quality. With a keen eye for detail and a love for problem-solving, I strive to contribute to the development of robust and user-friendly applications.</p>
+                <p data-translate="aboutText2">My academic background has equipped me with a strong foundation in various programming languages and web technologies. I'm constantly learning and adapting to new technologies to stay at the forefront of the ever-evolving tech landscape.</p>
             </section>
             
             <section id="skills">
-                <h2>Skills</h2>
+                <h2 data-translate="skills">Skills</h2>
                 <ul class="skill-list">
-                    <li>HTML5 / CSS3 / JavaScript</li>
-                    <li>Python / Java</li>
-                    <li>React / Vue.js</li>
-                    <li>Git / GitHub</li>
-                    <li>Manual Testing</li>
-                    <li>Test Case Writing</li>
-                    <li>Bug Reporting</li>
-                    <li>Agile Methodologies</li>
-                    <li>SQL / Database Management</li>
-                    <li>RESTful APIs</li>
-                    <li>UI/UX Design Principles</li>
-                    <li>Performance Testing</li>
+                    <li><i class="fa-brands fa-html5"></i> HTML</li>
+                    <li><i class="fa-brands fa-css3-alt"></i> CSS</li>
+                    <li><i class="fa-brands fa-js"></i> JavaScript</li>
+                    <li><i class="fa-solid fa-database"></i> SQL</li>
+                    <li><i class="fa-brands fa-angular"></i> Angular</li>
                 </ul>
             </section>
             
             <section id="projects">
-                <h2>Projects</h2>
+                <h2 data-translate="projects">Projects</h2>
                 <div class="project-grid">
                     <div class="project-card">
                         <img src="https://via.placeholder.com/300x200" alt="E-commerce Platform">
-                        <h3>E-commerce Platform</h3>
-                        <p>A full-stack web application built with React and Node.js, featuring user authentication, product catalog, and payment integration.</p>
+                        <h3 data-translate="project1Title">E-commerce Platform</h3>
+                        <p data-translate="project1Desc">A full-stack web application built with React and Node.js, featuring user authentication, product catalog, and payment integration.</p>
                         <div class="project-links">
-                            <a href="#" class="btn btn-small">View Project</a>
+                            <a href="#" class="btn btn-small" data-translate="viewProject">View Project</a>
                             <a href="#" class="btn btn-small">GitHub</a>
                         </div>
                     </div>
                     <div class="project-card">
                         <img src="https://via.placeholder.com/300x200" alt="Bug Tracking System">
-                        <h3>Bug Tracking System</h3>
-                        <p>A QA tool developed using Python and Django, allowing teams to efficiently manage and track software bugs throughout the development lifecycle.</p>
+                        <h3 data-translate="project2Title">Bug Tracking System</h3>
+                        <p data-translate="project2Desc">A QA tool developed using Python and Django, allowing teams to efficiently manage and track software bugs throughout the development lifecycle.</p>
                         <div class="project-links">
-                            <a href="#" class="btn btn-small">View Project</a>
+                            <a href="#" class="btn btn-small" data-translate="viewProject">View Project</a>
                             <a href="#" class="btn btn-small">GitHub</a>
                         </div>
                     </div>
                     <div class="project-card">
                         <img src="https://via.placeholder.com/300x200" alt="Portfolio Website">
-                        <h3>Portfolio Website</h3>
-                        <p>This responsive portfolio showcasing my skills and projects, built with HTML, CSS, and JavaScript to demonstrate my web development abilities.</p>
+                        <h3 data-translate="project3Title">Portfolio Website</h3>
+                        <p data-translate="project3Desc">This responsive portfolio showcasing my skills and projects, built with HTML, CSS, and JavaScript to demonstrate my web development abilities.</p>
                         <div class="project-links">
-                            <a href="#" class="btn btn-small">View Project</a>
+                            <a href="#" class="btn btn-small" data-translate="viewProject">View Project</a>
                             <a href="#" class="btn btn-small">GitHub</a>
                         </div>
                     </div>
@@ -94,20 +87,23 @@
             </section>
             
             <section id="contact">
-                <h2>Contact Me</h2>
-                <form id="contact-form">
-                    <input type="text" placeholder="Name" required>
-                    <input type="email" placeholder="Email" required>
-                    <textarea placeholder="Message" required></textarea>
-                    <button type="submit" class="btn">Send Message</button>
-                </form>
+                <h2 data-translate="contactMe">Contact Me</h2>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> <span data-translate="email">Email</span>: <a href="mailto:agustinelisey22@gmail.com">agustinelisey22@gmail.com</a></p>
+                    <p><i class="fas fa-phone"></i> <span data-translate="phone">Phone</span>: +54 9 11 3881-3921</p>
+                    <p><i class="fas fa-map-marker-alt"></i> <span data-translate="location">Location</span>: Buenos Aires, BA</p>
+                </div>
             </section>
         </main>
         
         <footer>
-            <p>&copy; 2025 Agustin Elisey Larco. All rights reserved.</p>
+            <p>&copy; 2025 Agustin Elisey Larco. <span data-translate="allRightsReserved">All rights reserved.</span></p>
         </footer>
+        <button id="languageSwitcher" class="btn-language">
+            <i class="fa-solid fa-earth-americas"></i>
+        </button>
     </div>
-    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/language.js"></script>
 </body>
 </html>
