@@ -379,6 +379,14 @@ body {
     background-color: rgba(16, 185, 129, 0.05);
 }
 
+/* Fix para botones hero como links */
+a.btn-primary,
+a.btn-secondary {
+    text-decoration: none;
+    display: inline-flex;
+    font-family: 'Fira Code', monospace;
+}
+
 /* ============================================
    About Section
    ============================================ */

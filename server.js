@@ -18,14 +18,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Importar datos del portafolio
 const PORTFOLIO_DATA = {
   name: "Agustin Elisey Larco",
-  title: "Data Entry Analyst at Shalion",
+  title: "Data Analyst | QA Tester",
   location: "Buenos Aires, Provincia de Buenos Aires, Argentina",
-  about: `Como Analista de Datos en Shalion, aplico mis habilidades en capacidad de análisis, Quality Assurance y Testing. Mi experiencia incluye el uso de SQL para validación de datos, documentación de procesos y la identificación y reporte de inconsistencias en datos, todo dentro de entornos ágiles colaborativos.`,
+  about: `Como ex Analista de Datos en Shalion, apliqué mis habilidades en capacidad de análisis, Quality Assurance y Testing. Mi experiencia incluye el uso de SQL para validación de datos, documentación de procesos y la identificación y reporte de inconsistencias en datos, todo dentro de entornos ágiles colaborativos.`,
   experience: [
     {
       company: "Shalion",
       role: "Analista de Datos",
-      period: "may. 2024 - actualidad",
+      period: "may. 2024 - feb. 2026",
       skills: ["Hojas de cálculo de Google", "SQL", "Análisis de Datos", "Quality Assurance"]
     }
   ],
