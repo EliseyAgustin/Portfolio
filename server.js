@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 // Cargar variables de entorno
 dotenv.config();
@@ -8,12 +10,34 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Vercel (y otros hosts serverless) están detrás de un proxy; sin esto,
+// express-rate-limit no puede identificar la IP real del visitante.
+app.set('trust proxy', 1);
+
+// Headers de seguridad básicos (X-Content-Type-Options, X-Frame-Options, etc.)
+app.use(helmet({
+  contentSecurityPolicy: false // el sitio carga Tailwind/Google Fonts desde CDNs externos
+}));
+
+// Middleware — límite de tamaño de body chico: ni el chat ni el form de contacto lo necesitan grande
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 // Servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Rate limiting para el asistente IA: evita abuso de la cuota de la API de Gemini
+const chatLimiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutos
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: (req) => ({
+    error: normalizeLang(req.body && req.body.lang) === 'en'
+      ? 'Too many requests. Please try again in a few minutes.'
+      : 'Demasiadas consultas. Probá de nuevo en unos minutos.'
+  })
+});
 
 // Datos del portafolio — fuente única compartida con el frontend (public/js/data.js)
 const { PORTFOLIO_DATA } = require('./public/js/data.js');
@@ -181,14 +205,24 @@ function generateFallbackResponse(userMessage, lang) {
   return `Puedo ayudarte con información sobre: experiencia laboral, educación, certificaciones, proyectos, skills técnicas, SQL, QA/Testing. ¿Qué te interesa saber?`;
 }
 
+const MAX_MESSAGE_LENGTH = 500;
+
 // Ruta API para el chatbot
-app.post('/api/chat', async (req, res) => {
+app.post('/api/chat', chatLimiter, async (req, res) => {
   try {
     const { message, lang: rawLang } = req.body;
     const lang = normalizeLang(rawLang);
 
-    if (!message) {
+    if (typeof message !== 'string' || message.trim().length === 0) {
       return res.status(400).json({ error: lang === 'en' ? 'Message required' : 'Mensaje requerido' });
+    }
+
+    if (message.length > MAX_MESSAGE_LENGTH) {
+      return res.status(400).json({
+        error: lang === 'en'
+          ? `Message too long (max ${MAX_MESSAGE_LENGTH} characters)`
+          : `Mensaje demasiado largo (máx. ${MAX_MESSAGE_LENGTH} caracteres)`
+      });
     }
 
     const model = geminiModels[lang];

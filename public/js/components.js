@@ -503,7 +503,7 @@ function setupAIAssistant() {
       const data = await response.json();
 
       chatContainer.removeChild(loadingDiv);
-      addAIMessage('assistant', data.response);
+      addAIMessage('assistant', response.ok ? data.response : (data.error || t('ai.connectionError')));
     } catch (error) {
       console.error('Error:', error);
       chatContainer.removeChild(loadingDiv);
