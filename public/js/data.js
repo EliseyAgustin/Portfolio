@@ -116,7 +116,11 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
       description: "Aplicación para el seguimiento de hábitos diarios, instalable y con soporte offline (PWA).",
       role: "Desarrollo full-stack",
       stack: ["React", "TypeScript", "Firebase"],
-      images: []
+      images: [
+        "/images/projects/buenos-habitos-1.png",
+        "/images/projects/buenos-habitos-2.png",
+        "/images/projects/buenos-habitos-3.png"
+      ]
     }
   ]
 };
