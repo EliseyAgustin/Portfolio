@@ -28,43 +28,38 @@ function renderProjects() {
     const card = document.createElement('div');
     card.className = 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-lg transition-all flex flex-col';
 
-    const imageSection = hasImages
-      ? `
-        <div class="project-image-wrapper group relative aspect-video bg-slate-100 dark:bg-slate-800 cursor-pointer">
+    const placeholderMarkup = `
+      <div class="project-placeholder absolute inset-0 flex-col items-center justify-center gap-2 text-slate-300 dark:text-slate-600 bg-slate-100 dark:bg-slate-800" style="${hasImages ? 'display:none;' : 'display:flex;'}">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+          <polyline points="21 15 16 10 5 21"></polyline>
+        </svg>
+        <span class="text-xs font-medium">Vista previa próximamente</span>
+      </div>
+    `;
+
+    const imageSection = `
+      <div class="project-image-wrapper group relative aspect-video bg-slate-100 dark:bg-slate-800 cursor-pointer">
+        ${hasImages ? `
           <img
             src="${project.images[0]}"
             alt="${project.name}"
             class="w-full h-full object-cover"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           />
-          <div class="absolute inset-0 flex-col items-center justify-center gap-2 text-slate-300 dark:text-slate-600 bg-slate-100 dark:bg-slate-800" style="display:none;">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <circle cx="8.5" cy="8.5" r="1.5"></circle>
-              <polyline points="21 15 16 10 5 21"></polyline>
+        ` : ''}
+        ${placeholderMarkup}
+        <div class="absolute inset-0 bg-slate-950/0 group-hover:bg-slate-950/40 transition-colors flex items-center justify-center">
+          <span class="opacity-0 group-hover:opacity-100 transition-opacity text-xs font-semibold text-white flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 3h6v6"></path><path d="M9 21H3v-6"></path><path d="M21 3l-7 7"></path><path d="M3 21l7-7"></path>
             </svg>
-            <span class="text-xs font-medium">Vista previa próximamente</span>
-          </div>
-          <div class="absolute inset-0 bg-slate-950/0 group-hover:bg-slate-950/40 transition-colors flex items-center justify-center">
-            <span class="opacity-0 group-hover:opacity-100 transition-opacity text-xs font-semibold text-white flex items-center gap-1.5">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M15 3h6v6"></path><path d="M9 21H3v-6"></path><path d="M21 3l-7 7"></path><path d="M3 21l7-7"></path>
-              </svg>
-              Ver galería${project.images.length > 1 ? ` (${project.images.length})` : ''}
-            </span>
-          </div>
+            ${hasImages ? `Ver galería${project.images.length > 1 ? ` (${project.images.length})` : ''}` : 'Ver más'}
+          </span>
         </div>
-      `
-      : `
-        <div class="relative aspect-video bg-slate-100 dark:bg-slate-800 flex flex-col items-center justify-center gap-2 text-slate-300 dark:text-slate-600">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-            <polyline points="21 15 16 10 5 21"></polyline>
-          </svg>
-          <span class="text-xs font-medium">Vista previa próximamente</span>
-        </div>
-      `;
+      </div>
+    `;
 
     card.innerHTML = `
       ${imageSection}
@@ -78,11 +73,9 @@ function renderProjects() {
       </div>
     `;
 
-    if (hasImages) {
-      card.querySelector('.project-image-wrapper').addEventListener('click', () => {
-        openProjectModal(project);
-      });
-    }
+    card.querySelector('.project-image-wrapper').addEventListener('click', () => {
+      openProjectModal(project);
+    });
 
     container.appendChild(card);
   });
@@ -92,7 +85,7 @@ function renderProjects() {
 const projectModalState = { images: [], index: 0 };
 
 function openProjectModal(project) {
-  projectModalState.images = project.images;
+  projectModalState.images = Array.isArray(project.images) ? project.images : [];
   projectModalState.index = 0;
 
   document.getElementById('projectModalTitle').textContent = project.name;
@@ -114,10 +107,20 @@ function closeProjectModal() {
 function updateProjectModalView() {
   const { images, index } = projectModalState;
   const title = document.getElementById('projectModalTitle').textContent;
+  const hasImages = images.length > 0;
 
   const img = document.getElementById('projectModalImage');
-  img.src = images[index];
-  img.alt = title;
+  const placeholder = document.getElementById('projectModalPlaceholder');
+
+  if (hasImages) {
+    img.src = images[index];
+    img.alt = title;
+    img.style.display = 'block';
+    placeholder.style.display = 'none';
+  } else {
+    img.style.display = 'none';
+    placeholder.style.display = 'flex';
+  }
 
   const counter = document.getElementById('projectModalCounter');
   const prevBtn = document.getElementById('projectModalPrev');
@@ -148,12 +151,14 @@ function setupProjectModal() {
 
   document.getElementById('projectModalPrev').addEventListener('click', () => {
     const { images } = projectModalState;
+    if (images.length < 2) return;
     projectModalState.index = (projectModalState.index - 1 + images.length) % images.length;
     updateProjectModalView();
   });
 
   document.getElementById('projectModalNext').addEventListener('click', () => {
     const { images } = projectModalState;
+    if (images.length < 2) return;
     projectModalState.index = (projectModalState.index + 1) % images.length;
     updateProjectModalView();
   });

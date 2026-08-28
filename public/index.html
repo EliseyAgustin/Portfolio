@@ -37,9 +37,11 @@
     <!-- Navbar -->
     <nav id="navbar" class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-shadow">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#hero" class="flex items-center gap-2.5">
-                <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 dark:shadow-emerald-500/20 ring-1 ring-emerald-300/40">
-                    <span class="font-mono font-bold text-white text-sm tracking-tight">AE</span>
+            <a href="#hero" class="group flex items-center gap-3">
+                <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 via-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 dark:shadow-emerald-500/25 ring-1 ring-white/25 group-hover:scale-105 transition-transform">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 12 8 12 10 6 14 18 16 12 21 12"></polyline>
+                    </svg>
                 </div>
                 <span class="font-semibold text-slate-900 dark:text-white tracking-tight">Agustín Elisey</span>
             </a>
@@ -248,9 +250,11 @@
         <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                 <div class="flex flex-col gap-4">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-                            <span class="font-mono font-bold text-white text-xs">AE</span>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 via-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20 ring-1 ring-white/25">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 12 8 12 10 6 14 18 16 12 21 12"></polyline>
+                            </svg>
                         </div>
                         <span class="text-sm font-semibold text-white tracking-wide">Agustín Elisey</span>
                     </div>
@@ -311,6 +315,14 @@
             </button>
             <div class="relative aspect-video bg-slate-100 dark:bg-slate-800">
                 <img id="projectModalImage" src="" alt="" class="w-full h-full object-contain" />
+                <div id="projectModalPlaceholder" class="absolute inset-0 flex-col items-center justify-center gap-2 text-slate-300 dark:text-slate-600" style="display:none;">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    <span class="text-sm font-medium">Vista previa próximamente</span>
+                </div>
                 <button id="projectModalPrev" type="button" class="hidden absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 items-center justify-center hover:bg-white dark:hover:bg-slate-700 transition-colors" aria-label="Anterior">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
                 </button>
