@@ -104,7 +104,12 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
       description: "Sistema de gestión integral para empresas constructoras: control de stock, seguimiento de obras, administración de empleados, sueldos y gastos.",
       role: "Desarrollo full-stack",
       stack: ["React", "TypeScript", "PostgreSQL", "Docker", "Tailwind CSS"],
-      images: []
+      images: [
+        "/images/projects/stock-system-obras-1.png",
+        "/images/projects/stock-system-obras-2.png",
+        "/images/projects/stock-system-obras-3.png",
+        "/images/projects/stock-system-obras-4.png"
+      ]
     },
     {
       name: "Buenos Hábitos",
