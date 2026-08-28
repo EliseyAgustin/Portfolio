@@ -46,7 +46,7 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
       date: "ago. 2026",
       id: "GZ4HJNJS1ZOO",
       skills: [],
-      logo: null
+      logo: "/images/logo-google.svg"
     },
     {
       title: "Foundations of Cybersecurity",
@@ -54,7 +54,7 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
       date: "ago. 2026",
       id: "VNESX3Q37L61",
       skills: ["Ciberseguridad", "Seguridad de la información"],
-      logo: null
+      logo: "/images/logo-google.svg"
     },
     {
       title: "QA Engineer desde 0 hasta avanzado",
@@ -70,7 +70,7 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
       date: "mar. 2024",
       id: null,
       skills: [],
-      logo: null
+      logo: "/images/logo-cisco.svg"
     }
   ],
 
