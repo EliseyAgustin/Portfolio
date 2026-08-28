@@ -1,5 +1,71 @@
 // Funciones para renderizar componentes
 
+// --- Idioma (ES/EN) ---
+let currentLang = localStorage.getItem('lang') === 'en' ? 'en' : 'es';
+
+function getData() {
+  return PORTFOLIO_DATA[currentLang];
+}
+
+// Busca un texto en UI_STRINGS por ruta con puntos, ej: t('nav.about')
+function t(path) {
+  const parts = path.split('.');
+  let node = UI_STRINGS[currentLang];
+  for (const part of parts) {
+    if (node == null) return path;
+    node = node[part];
+  }
+  return node != null ? node : path;
+}
+
+// Aplica las traducciones a todo el texto fijo marcado con data-i18n* en el HTML
+function applyStaticTranslations() {
+  document.documentElement.lang = currentLang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.dataset.i18n);
+  });
+
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    el.innerHTML = t(el.dataset.i18nHtml);
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    el.placeholder = t(el.dataset.i18nPlaceholder);
+  });
+
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    el.setAttribute('aria-label', t(el.dataset.i18nAria));
+  });
+
+  const langLabel = document.getElementById('langToggleLabel');
+  if (langLabel) langLabel.textContent = currentLang === 'es' ? 'EN' : 'ES';
+}
+
+// Vuelve a renderizar todo el contenido dinámico (datos del portafolio) en el idioma actual
+function renderDynamicContent() {
+  renderAbout();
+  renderProjects();
+  renderExperience();
+  renderEducation();
+  renderCertifications();
+  renderSkills();
+}
+
+function setupLangToggle() {
+  applyStaticTranslations();
+
+  const toggle = document.getElementById('langToggle');
+  toggle.addEventListener('click', () => {
+    currentLang = currentLang === 'es' ? 'en' : 'es';
+    localStorage.setItem('lang', currentLang);
+
+    applyStaticTranslations();
+    renderDynamicContent();
+    resetAIAssistant();
+  });
+}
+
 // Genera el contenido del slot de logo (educación/certificaciones): imagen si hay `logoPath`,
 // con fallback a una inicial si el archivo no existe; o directamente la inicial si no hay logo.
 function logoBadgeMarkup(logoPath, name) {
@@ -26,7 +92,9 @@ function logoBadgeMarkup(logoPath, name) {
 // Renderizar contenido About
 function renderAbout() {
   const container = document.getElementById('aboutContent');
-  const paragraphs = PORTFOLIO_DATA.about.split('\n\n');
+  container.innerHTML = '';
+
+  const paragraphs = getData().about.split('\n\n');
 
   const aboutDiv = document.createElement('div');
   aboutDiv.className = 'flex flex-col gap-4';
@@ -44,8 +112,9 @@ function renderAbout() {
 // Renderizar proyectos
 function renderProjects() {
   const container = document.getElementById('projectsContainer');
+  container.innerHTML = '';
 
-  PORTFOLIO_DATA.projects.forEach(project => {
+  getData().projects.forEach(project => {
     const hasImages = Array.isArray(project.images) && project.images.length > 0;
 
     const card = document.createElement('div');
@@ -58,7 +127,7 @@ function renderProjects() {
           <circle cx="8.5" cy="8.5" r="1.5"></circle>
           <polyline points="21 15 16 10 5 21"></polyline>
         </svg>
-        <span class="text-xs font-medium">Vista previa próximamente</span>
+        <span class="text-xs font-medium">${t('project.previewSoon')}</span>
       </div>
     `;
 
@@ -78,7 +147,7 @@ function renderProjects() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M15 3h6v6"></path><path d="M9 21H3v-6"></path><path d="M21 3l-7 7"></path><path d="M3 21l7-7"></path>
             </svg>
-            ${hasImages ? `Ver galería${project.images.length > 1 ? ` (${project.images.length})` : ''}` : 'Ver más'}
+            ${hasImages ? `${t('project.viewGallery')}${project.images.length > 1 ? ` (${project.images.length})` : ''}` : t('project.viewMore')}
           </span>
         </div>
       </div>
@@ -238,6 +307,29 @@ function setupProjectModal() {
   });
 }
 
+// --- Copiar email (respaldo por si el navegador no tiene un cliente de correo configurado) ---
+function setupEmailCopy() {
+  document.querySelectorAll('.email-copy-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      const email = btn.dataset.email;
+      if (!email || !navigator.clipboard) return;
+
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch (err) {
+        return;
+      }
+
+      const tooltip = document.createElement('span');
+      tooltip.textContent = t('emailCopied');
+      tooltip.className = 'absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-slate-900 dark:bg-slate-700 text-white text-xs font-medium whitespace-nowrap pointer-events-none z-10';
+      btn.appendChild(tooltip);
+
+      setTimeout(() => tooltip.remove(), 1500);
+    });
+  });
+}
+
 // --- Modo claro / oscuro ---
 function setupThemeToggle() {
   const toggle = document.getElementById('themeToggle');
@@ -251,8 +343,9 @@ function setupThemeToggle() {
 // Renderizar experiencia
 function renderExperience() {
   const container = document.getElementById('experienceContainer');
+  container.innerHTML = '';
 
-  PORTFOLIO_DATA.experience.forEach(exp => {
+  getData().experience.forEach(exp => {
     const item = document.createElement('div');
 
     item.innerHTML = `
@@ -277,8 +370,9 @@ function renderExperience() {
 // Renderizar educación
 function renderEducation() {
   const container = document.getElementById('educationContainer');
+  container.innerHTML = '';
 
-  PORTFOLIO_DATA.education.forEach(edu => {
+  getData().education.forEach(edu => {
     const card = document.createElement('div');
     card.className = 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 hover:border-slate-300 dark:hover:border-slate-700 transition-colors';
 
@@ -307,8 +401,9 @@ function renderEducation() {
 // Renderizar certificaciones
 function renderCertifications() {
   const container = document.getElementById('certificationsContainer');
+  container.innerHTML = '';
 
-  PORTFOLIO_DATA.certifications.forEach(cert => {
+  getData().certifications.forEach(cert => {
     const card = document.createElement('div');
     card.className = 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 hover:border-slate-300 dark:hover:border-slate-700 transition-colors';
 
@@ -320,10 +415,10 @@ function renderCertifications() {
         <div class="flex-1">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-1">
             <h3 class="text-lg font-bold text-slate-900 dark:text-white">${cert.title}</h3>
-            <span class="font-mono text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-1 rounded-md w-fit">Exp: ${cert.date}</span>
+            <span class="font-mono text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-1 rounded-md w-fit">${t('cert.issued')} ${cert.date}</span>
           </div>
           <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">${cert.issuer}</p>
-          ${cert.id ? `<p class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mb-4">Credential ID: ${cert.id}</p>` : '<div class="mb-3"></div>'}
+          ${cert.id ? `<p class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mb-4">${t('cert.credentialId')} ${cert.id}</p>` : '<div class="mb-3"></div>'}
           ${cert.skills.length > 0 ? `
             <div class="flex flex-wrap gap-2">
               ${cert.skills.map(skill => `<span class="font-mono text-[10px] px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 uppercase">${skill}</span>`).join('')}
@@ -340,11 +435,12 @@ function renderCertifications() {
 // Renderizar skills
 function renderSkills() {
   const container = document.getElementById('skillsContainer');
+  container.innerHTML = '';
 
   const skillsGrid = document.createElement('div');
   skillsGrid.className = 'grid grid-cols-2 gap-3';
 
-  PORTFOLIO_DATA.skills.forEach(skill => {
+  getData().skills.forEach(skill => {
     const item = document.createElement('div');
     item.className = 'p-3 bg-slate-50 dark:bg-slate-800 rounded-lg flex flex-col gap-1';
 
@@ -363,15 +459,16 @@ function renderSkills() {
 function setupAIAssistant() {
   const form = document.getElementById('aiForm');
   const input = document.getElementById('aiInput');
-  const chatContainer = document.getElementById('aiChat');
 
-  addAIMessage('assistant', '¡Hola! Soy el asistente virtual de Agustín. Preguntame sobre su experiencia, formación, proyectos o habilidades técnicas.');
+  addAIMessage('assistant', t('ai.welcome'));
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const message = input.value.trim();
     if (!message) return;
+
+    const chatContainer = document.getElementById('aiChat');
 
     addAIMessage('user', message);
     input.value = '';
@@ -389,7 +486,7 @@ function setupAIAssistant() {
         <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
         <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
       </svg>
-      Escribiendo...
+      ${t('ai.thinking')}
     `;
     chatContainer.appendChild(loadingDiv);
     chatContainer.scrollTop = chatContainer.scrollHeight;
@@ -400,7 +497,7 @@ function setupAIAssistant() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message })
+        body: JSON.stringify({ message, lang: currentLang })
       });
 
       const data = await response.json();
@@ -410,11 +507,18 @@ function setupAIAssistant() {
     } catch (error) {
       console.error('Error:', error);
       chatContainer.removeChild(loadingDiv);
-      addAIMessage('assistant', 'No pude conectar con el asistente. Por favor intentá nuevamente en unos segundos.');
+      addAIMessage('assistant', t('ai.connectionError'));
     }
 
     chatContainer.scrollTop = chatContainer.scrollHeight;
   });
+}
+
+// Limpia el chat y vuelve a mostrar el saludo inicial en el idioma actual (al cambiar de idioma)
+function resetAIAssistant() {
+  const chatContainer = document.getElementById('aiChat');
+  chatContainer.innerHTML = '';
+  addAIMessage('assistant', t('ai.welcome'));
 }
 
 // Escapa HTML antes de insertarlo como texto en el chat (evita self-XSS vía input del usuario)
@@ -436,8 +540,10 @@ function addAIMessage(type, text) {
     ? 'bg-slate-900 dark:bg-emerald-600 text-white rounded-2xl rounded-br-sm'
     : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-2xl rounded-bl-sm';
 
+  const label = isUser ? t('ai.you') : t('ai.assistant');
+
   messageDiv.innerHTML = `
-    <span class="text-[10px] font-medium text-slate-400 px-1">${isUser ? 'Tú' : 'Asistente'}</span>
+    <span class="text-[10px] font-medium text-slate-400 px-1">${label}</span>
     <p class="max-w-[85%] px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${bubbleClasses}">${escapeHtml(text)}</p>
   `;
 

@@ -2,6 +2,9 @@
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
+  // Idioma: aplica las traducciones fijas antes de renderizar el contenido dinámico
+  setupLangToggle();
+
   // Renderizar componentes
   renderAbout();
   renderProjects();
@@ -12,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupAIAssistant();
   setupProjectModal();
   setupThemeToggle();
+  setupEmailCopy();
 
   // Configurar observador de scroll para animaciones
   setupScrollReveal();
