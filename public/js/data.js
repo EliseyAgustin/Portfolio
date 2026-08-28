@@ -62,27 +62,32 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
     { name: "Documentación", category: "Process" }
   ],
 
+  // Cada proyecto puede tener 0, 1 o varias imágenes en `images`.
+  // Si tiene al menos una, la card muestra la primera como miniatura y
+  // al hacer click abre el modal con la galería completa (con flechas
+  // de navegación si hay más de una). Con el array vacío se muestra un
+  // placeholder y la card no es clickeable.
   projects: [
     {
       name: "Sistema de Facturación ARCA",
       description: "Plataforma que simplifica la facturación electrónica con ARCA en simples pasos, reduciendo la complejidad del proceso para el cliente final.",
       role: "Desarrollo full-stack",
       stack: ["React", "TypeScript", "PostgreSQL", "Docker", "Tailwind CSS"],
-      image: "/images/projects/facturacion-arca.png"
+      images: []
     },
     {
       name: "Stock System Obras",
       description: "Sistema de gestión integral para empresas constructoras: control de stock, seguimiento de obras, administración de empleados, sueldos y gastos.",
       role: "Desarrollo full-stack",
       stack: ["React", "TypeScript", "PostgreSQL", "Docker", "Tailwind CSS"],
-      image: "/images/projects/stock-system-obras.png"
+      images: []
     },
     {
       name: "Buenos Hábitos",
       description: "Aplicación para el seguimiento de hábitos diarios, instalable y con soporte offline (PWA).",
       role: "Desarrollo full-stack",
       stack: ["React", "TypeScript", "Firebase"],
-      image: "/images/projects/buenos-habitos.png"
+      images: []
     }
   ]
 };

@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCertifications();
   renderSkills();
   setupAIAssistant();
+  setupProjectModal();
+  setupThemeToggle();
 
   // Configurar observador de scroll para animaciones
   setupScrollReveal();
@@ -48,7 +50,10 @@ function setupStickyNavbar() {
 
     // Agregar sombra sutil cuando hay scroll
     if (currentScroll > 20) {
-      navbar.style.boxShadow = '0 1px 6px rgba(15, 23, 42, 0.06)';
+      const isDark = document.documentElement.classList.contains('dark');
+      navbar.style.boxShadow = isDark
+        ? '0 1px 6px rgba(0, 0, 0, 0.4)'
+        : '0 1px 6px rgba(15, 23, 42, 0.06)';
     } else {
       navbar.style.boxShadow = 'none';
     }
