@@ -4,15 +4,16 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Renderizar componentes
   renderAbout();
+  renderProjects();
   renderExperience();
   renderEducation();
   renderCertifications();
   renderSkills();
   setupAIAssistant();
-  
+
   // Configurar observador de scroll para animaciones
   setupScrollReveal();
-  
+
   // Configurar navbar sticky
   setupStickyNavbar();
 });
@@ -23,7 +24,7 @@ function setupScrollReveal() {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
   };
-  
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -31,7 +32,7 @@ function setupScrollReveal() {
       }
     });
   }, observerOptions);
-  
+
   // Observar todos los elementos con clase 'reveal'
   const revealElements = document.querySelectorAll('.reveal');
   revealElements.forEach(el => observer.observe(el));
@@ -39,35 +40,21 @@ function setupScrollReveal() {
 
 // Configurar navbar sticky con efecto
 function setupStickyNavbar() {
-  const navbar = document.querySelector('.navbar');
+  const navbar = document.getElementById('navbar');
   let lastScroll = 0;
-  
+
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
-    // Agregar sombra cuando hay scroll
-    if (currentScroll > 100) {
-      navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
+
+    // Agregar sombra sutil cuando hay scroll
+    if (currentScroll > 20) {
+      navbar.style.boxShadow = '0 1px 6px rgba(15, 23, 42, 0.06)';
     } else {
       navbar.style.boxShadow = 'none';
     }
-    
+
     lastScroll = currentScroll;
   });
 }
 
-// Efecto parallax suave al background
-window.addEventListener('scroll', () => {
-  const scrolled = window.pageYOffset;
-  const glows = document.querySelectorAll('.bg-glow');
-  
-  glows.forEach((glow, index) => {
-    const speed = index === 0 ? 0.5 : 0.3;
-    glow.style.transform = `translateY(${scrolled * speed}px)`;
-  });
-});
-
-// Log de inicio
-console.log('%c🚀 Portfolio cargado correctamente', 'color: #10b981; font-size: 16px; font-weight: bold;');
-console.log('%cDesarrollado con HTML, CSS y JavaScript vanilla + Express', 'color: #64748b;');
-console.log('%c> SYSTEM_STATUS: ONLINE', 'color: #10b981; font-family: "Fira Code", monospace;');
+console.log('Portfolio cargado correctamente');

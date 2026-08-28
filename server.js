@@ -15,65 +15,32 @@ app.use(express.urlencoded({ extended: true }));
 // Servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Importar datos del portafolio
-const PORTFOLIO_DATA = {
-  name: "Agustin Elisey Larco",
-  title: "Data Analyst | QA Tester",
-  location: "Buenos Aires, Provincia de Buenos Aires, Argentina",
-  about: `Como ex Analista de Datos en Shalion, apliqué mis habilidades en capacidad de análisis, Quality Assurance y Testing. Mi experiencia incluye el uso de SQL para validación de datos, documentación de procesos y la identificación y reporte de inconsistencias en datos, todo dentro de entornos ágiles colaborativos.`,
-  experience: [
-    {
-      company: "Shalion",
-      role: "Analista de Datos",
-      period: "may. 2024 - feb. 2026",
-      skills: ["Hojas de cálculo de Google", "SQL", "Análisis de Datos", "Quality Assurance"]
-    }
-  ],
-  education: [
-    {
-      institution: "Universidad Nacional del Oeste",
-      degree: "Tecnicatura Universitaria en Tecnologías Web",
-      date: "mar. 2023"
-    },
-    {
-      institution: "Universidad Nacional del Oeste",
-      degree: "Licenciatura en Informática",
-      date: "mar. 2020"
-    }
-  ],
-  certifications: [
-    {
-      title: "QA Engineer desde 0 hasta avanzado",
-      issuer: "Udemy",
-      date: "jun. 2025",
-      skills: ["JIRA", "Casos de prueba", "Metodologías Ágiles", "Testing Automation"]
-    }
-  ],
-  skills: ["SQL", "JIRA", "Resolución de incidencias", "Casos de prueba", "Trabajo en equipo", "Google Sheets", "Agile/Scrum", "Testing Manual", "Documentación"]
-};
+// Datos del portafolio — fuente única compartida con el frontend (public/js/data.js)
+const PORTFOLIO_DATA = require('./public/js/data.js');
 
 // Sistema de prompt para el asistente IA
 const SYSTEM_INSTRUCTION = `
-Eres el núcleo de inteligencia (Kernel) del portafolio de Agustin Elisey Larco. 
-Tu misión es proporcionar información técnica y profesional sobre su carrera como Analista de Datos y QA Engineer de forma extremadamente CONCISA.
+Sos el asistente virtual del portfolio de Agustin Elisey Larco.
+Tu misión es responder preguntas sobre su perfil profesional de forma clara, profesional y CONCISA.
 
-CONTEXTO DEL SISTEMA:
+CONTEXTO:
 - Candidato: ${PORTFOLIO_DATA.name}
 - Rol actual: ${PORTFOLIO_DATA.title}
-- Especialidades: SQL, QA Automation, Testing Manual, Documentación Ágil
 - Perfil: ${PORTFOLIO_DATA.about}
 - Experiencia: ${JSON.stringify(PORTFOLIO_DATA.experience)}
 - Educación: ${JSON.stringify(PORTFOLIO_DATA.education)}
 - Certificaciones: ${JSON.stringify(PORTFOLIO_DATA.certifications)}
-- Aptitudes: ${PORTFOLIO_DATA.skills.join(", ")}
+- Proyectos: ${JSON.stringify(PORTFOLIO_DATA.projects)}
+- Aptitudes: ${PORTFOLIO_DATA.skills.map(s => s.name).join(", ")}
 
 REGLAS DE RESPUESTA (CRÍTICAS):
 1. BREVEDAD: Responde siempre de forma corta y directa. No uses introducciones largas.
 2. NO REPETICIÓN: No repitas datos que ya mencionaste o que son obvios. Evita la redundancia.
-3. LÍMITE: Mantén tus respuestas en un máximo de 2-3 frases o puntos clave, a menos que te pidan una lista detallada.
-4. IDIOMA: Responde siempre en Español.
-5. TONO: Profesional, técnico y directo (estilo terminal).
-6. Si el usuario pregunta algo fuera de lo profesional, responde brevemente que el sistema está optimizado para consultas de carrera y formación.
+3. LÍMITE: Mantené tus respuestas en un máximo de 2-3 frases o puntos clave, a menos que te pidan una lista detallada.
+4. IDIOMA: Respondé siempre en Español.
+5. TONO: Profesional, cercano y directo.
+6. Si el usuario pregunta algo fuera de lo profesional, respondé brevemente que estás para ayudar con consultas de carrera, formación y proyectos.
+7. FORMATO: No uses Markdown (nada de **negritas**, asteriscos, ni listas con guiones). La respuesta se muestra como texto plano.
 `;
 
 // Inicializar Gemini AI (si hay API key)
@@ -85,7 +52,7 @@ async function initGemini() {
       const { GoogleGenerativeAI } = require('@google/generative-ai');
       const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
       geminiModel = genAI.getGenerativeModel({ 
-        model: 'gemini-2.0-flash',
+        model: 'gemini-3.6-flash',
         systemInstruction: SYSTEM_INSTRUCTION
       });
       console.log('✅ Gemini AI inicializado correctamente');
@@ -115,9 +82,13 @@ function generateFallbackResponse(userMessage) {
   }
   
   if (message.includes('skills') || message.includes('habilidades') || message.includes('tecnologías')) {
-    return `Mis principales skills técnicas son: ${PORTFOLIO_DATA.skills.slice(0, 6).join(', ')}. Especializado en análisis de datos y QA.`;
+    return `Mis principales skills técnicas son: ${PORTFOLIO_DATA.skills.slice(0, 6).map(s => s.name).join(', ')}. Especializado en análisis de datos y QA.`;
   }
-  
+
+  if (message.includes('proyecto')) {
+    return `Trabajé en proyectos como ${PORTFOLIO_DATA.projects.map(p => p.name).join(', ')}. Podés ver el detalle de cada uno en la sección de Proyectos.`;
+  }
+
   if (message.includes('sql') || message.includes('base de datos')) {
     return `Utilizo SQL para validación de datos, análisis y detección de inconsistencias en entornos de producción.`;
   }
@@ -134,7 +105,7 @@ function generateFallbackResponse(userMessage) {
     return `¡Hola! Estoy aquí para responder preguntas sobre la experiencia, habilidades y formación de Agustín. ¿Qué te gustaría saber?`;
   }
   
-  return `Puedo ayudarte con información sobre: experiencia laboral, educación, certificaciones, skills técnicas, SQL, QA/Testing. ¿Qué te interesa saber?`;
+  return `Puedo ayudarte con información sobre: experiencia laboral, educación, certificaciones, proyectos, skills técnicas, SQL, QA/Testing. ¿Qué te interesa saber?`;
 }
 
 // Ruta API para el chatbot

@@ -1,13 +1,14 @@
-// Datos del portafolio
+// Datos del portafolio — fuente única, consumida por el frontend (script clásico)
+// y por server.js (vía require) para mantener al asistente IA sincronizado.
 const PORTFOLIO_DATA = {
   name: "Agustin Elisey Larco",
   title: "Data Analyst | QA Tester",
   location: "Buenos Aires, Provincia de Buenos Aires, Argentina",
   contacts: 48,
-  about: `Como ex Analista de Datos en Shalion, apliqué mis habilidades en capacidad de análisis, Quality Assurance y Testing. Mi experiencia incluye el uso de SQL para validación de datos, documentación de procesos y la identificación y reporte de inconsistencias en datos, todo dentro de entornos ágiles colaborativos. 
+  about: `Como ex Analista de Datos en Shalion, apliqué mis habilidades en capacidad de análisis, Quality Assurance y Testing. Mi experiencia incluye el uso de SQL para validación de datos, documentación de procesos y la identificación y reporte de inconsistencias en datos, todo dentro de entornos ágiles colaborativos.
 
 Mi formación académica incluye una Licenciatura en Informática por la Universidad Nacional del Oeste, donde también obtuve una Tecnicatura en Tecnologías Web. Estoy certificado en QA Engineer por Udemy y actualmente desarrollo mis conocimientos en automatización de pruebas y metodologías ágiles para brindar soluciones de calidad en el ámbito tecnológico.`,
-  
+
   experience: [
     {
       company: "Shalion",
@@ -20,7 +21,7 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
       logo: "https://picsum.photos/seed/shalion/200/200"
     }
   ],
-  
+
   education: [
     {
       institution: "Universidad Nacional del Oeste",
@@ -37,7 +38,7 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
       logo: "/images/logo-uno.png"
     }
   ],
-  
+
   certifications: [
     {
       title: "QA Engineer desde 0 hasta avanzado",
@@ -48,7 +49,7 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
       logo: "/images/logo-udemy.png"
     }
   ],
-  
+
   skills: [
     { name: "SQL", category: "Data & DB" },
     { name: "JIRA", category: "Tools" },
@@ -59,5 +60,34 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
     { name: "Agile/Scrum", category: "Process" },
     { name: "Testing Manual", category: "QA" },
     { name: "Documentación", category: "Process" }
+  ],
+
+  projects: [
+    {
+      name: "Sistema de Facturación ARCA",
+      description: "Plataforma que simplifica la facturación electrónica con ARCA en simples pasos, reduciendo la complejidad del proceso para el cliente final.",
+      role: "Desarrollo full-stack",
+      stack: ["React", "TypeScript", "PostgreSQL", "Docker", "Tailwind CSS"],
+      image: "/images/projects/facturacion-arca.png"
+    },
+    {
+      name: "Stock System Obras",
+      description: "Sistema de gestión integral para empresas constructoras: control de stock, seguimiento de obras, administración de empleados, sueldos y gastos.",
+      role: "Desarrollo full-stack",
+      stack: ["React", "TypeScript", "PostgreSQL", "Docker", "Tailwind CSS"],
+      image: "/images/projects/stock-system-obras.png"
+    },
+    {
+      name: "Buenos Hábitos",
+      description: "Aplicación para el seguimiento de hábitos diarios, instalable y con soporte offline (PWA).",
+      role: "Desarrollo full-stack",
+      stack: ["React", "TypeScript", "Firebase"],
+      image: "/images/projects/buenos-habitos.png"
+    }
   ]
 };
+
+// Permite reutilizar el mismo archivo desde Node (server.js) sin afectar al navegador.
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = PORTFOLIO_DATA;
+}
