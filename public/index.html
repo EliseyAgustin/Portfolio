@@ -306,15 +306,15 @@
 
     <!-- Modal de galería de proyectos -->
     <div id="projectModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-        <div class="relative max-w-3xl w-full bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-2xl">
-            <button id="projectModalClose" type="button" class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-white dark:hover:bg-slate-700 transition-colors" aria-label="Cerrar">
+        <div id="projectModalDialog" class="relative max-w-3xl w-full bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-2xl transition-all">
+            <button id="projectModalClose" type="button" class="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-white dark:hover:bg-slate-700 transition-colors" aria-label="Cerrar">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
-            <div class="relative aspect-video bg-slate-100 dark:bg-slate-800">
-                <img id="projectModalImage" src="" alt="" class="w-full h-full object-contain" />
+            <div id="projectModalImageWrapper" class="relative aspect-video bg-slate-100 dark:bg-slate-800 overflow-auto">
+                <img id="projectModalImage" src="" alt="" class="w-full h-full object-contain cursor-zoom-in" />
                 <div id="projectModalPlaceholder" class="absolute inset-0 flex-col items-center justify-center gap-2 text-slate-300 dark:text-slate-600" style="display:none;">
                     <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
@@ -323,10 +323,18 @@
                     </svg>
                     <span class="text-sm font-medium">Vista previa próximamente</span>
                 </div>
-                <button id="projectModalPrev" type="button" class="hidden absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 items-center justify-center hover:bg-white dark:hover:bg-slate-700 transition-colors" aria-label="Anterior">
+                <div id="projectModalZoomHint" class="absolute bottom-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 flex items-center justify-center pointer-events-none">
+                    <svg id="projectModalZoomIconIn" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                    <svg id="projectModalZoomIconOut" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+                        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+                <button id="projectModalPrev" type="button" class="hidden absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 items-center justify-center hover:bg-white dark:hover:bg-slate-700 transition-colors" aria-label="Anterior">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
                 </button>
-                <button id="projectModalNext" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 items-center justify-center hover:bg-white dark:hover:bg-slate-700 transition-colors" aria-label="Siguiente">
+                <button id="projectModalNext" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 items-center justify-center hover:bg-white dark:hover:bg-slate-700 transition-colors" aria-label="Siguiente">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
                 </button>
             </div>

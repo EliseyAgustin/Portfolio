@@ -105,13 +105,14 @@ function renderProjects() {
 }
 
 // --- Modal de galería de proyectos ---
-const projectModalState = { images: [], index: 0 };
+const projectModalState = { images: [], index: 0, zoomed: false };
 
 function openProjectModal(project) {
   projectModalState.images = Array.isArray(project.images) ? project.images : [];
   projectModalState.index = 0;
 
   document.getElementById('projectModalTitle').textContent = project.name;
+  setProjectModalZoom(false);
   updateProjectModalView();
 
   const modal = document.getElementById('projectModal');
@@ -125,6 +126,39 @@ function closeProjectModal() {
   modal.classList.add('hidden');
   modal.classList.remove('flex');
   document.body.style.overflow = '';
+  setProjectModalZoom(false);
+}
+
+// Alterna entre la imagen ajustada al modal y su tamaño real (con scroll) para poder verla en detalle.
+function setProjectModalZoom(zoomed) {
+  projectModalState.zoomed = zoomed;
+
+  const dialog = document.getElementById('projectModalDialog');
+  const wrapper = document.getElementById('projectModalImageWrapper');
+  const img = document.getElementById('projectModalImage');
+  const iconIn = document.getElementById('projectModalZoomIconIn');
+  const iconOut = document.getElementById('projectModalZoomIconOut');
+
+  if (zoomed) {
+    dialog.classList.remove('max-w-3xl');
+    dialog.classList.add('max-w-[95vw]');
+    wrapper.classList.remove('aspect-video');
+    wrapper.classList.add('h-[80vh]');
+    img.classList.remove('w-full', 'h-full', 'object-contain', 'cursor-zoom-in');
+    img.classList.add('w-auto', 'h-auto', 'max-w-none', 'cursor-zoom-out');
+    wrapper.scrollTop = 0;
+    wrapper.scrollLeft = 0;
+  } else {
+    dialog.classList.add('max-w-3xl');
+    dialog.classList.remove('max-w-[95vw]');
+    wrapper.classList.add('aspect-video');
+    wrapper.classList.remove('h-[80vh]');
+    img.classList.add('w-full', 'h-full', 'object-contain', 'cursor-zoom-in');
+    img.classList.remove('w-auto', 'h-auto', 'max-w-none', 'cursor-zoom-out');
+  }
+
+  iconIn.style.display = zoomed ? 'none' : 'block';
+  iconOut.style.display = zoomed ? 'block' : 'none';
 }
 
 function updateProjectModalView() {
@@ -134,15 +168,18 @@ function updateProjectModalView() {
 
   const img = document.getElementById('projectModalImage');
   const placeholder = document.getElementById('projectModalPlaceholder');
+  const zoomHint = document.getElementById('projectModalZoomHint');
 
   if (hasImages) {
     img.src = images[index];
     img.alt = title;
     img.style.display = 'block';
     placeholder.style.display = 'none';
+    zoomHint.style.display = 'flex';
   } else {
     img.style.display = 'none';
     placeholder.style.display = 'flex';
+    zoomHint.style.display = 'none';
   }
 
   const counter = document.getElementById('projectModalCounter');
@@ -172,10 +209,16 @@ function setupProjectModal() {
     if (e.target === modal) closeProjectModal();
   });
 
+  document.getElementById('projectModalImage').addEventListener('click', (e) => {
+    e.stopPropagation();
+    setProjectModalZoom(!projectModalState.zoomed);
+  });
+
   document.getElementById('projectModalPrev').addEventListener('click', () => {
     const { images } = projectModalState;
     if (images.length < 2) return;
     projectModalState.index = (projectModalState.index - 1 + images.length) % images.length;
+    setProjectModalZoom(false);
     updateProjectModalView();
   });
 
@@ -183,6 +226,7 @@ function setupProjectModal() {
     const { images } = projectModalState;
     if (images.length < 2) return;
     projectModalState.index = (projectModalState.index + 1) % images.length;
+    setProjectModalZoom(false);
     updateProjectModalView();
   });
 

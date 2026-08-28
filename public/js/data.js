@@ -97,7 +97,11 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
       description: "Plataforma que simplifica la facturación electrónica con ARCA en simples pasos, reduciendo la complejidad del proceso para el cliente final.",
       role: "Desarrollo full-stack",
       stack: ["React", "TypeScript", "PostgreSQL", "Docker", "Tailwind CSS"],
-      images: []
+      images: [
+        "/images/projects/facturacion-arca-1.png",
+        "/images/projects/facturacion-arca-2.png",
+        "/images/projects/facturacion-arca-3.png"
+      ]
     },
     {
       name: "Stock System Obras",
@@ -109,6 +113,19 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
         "/images/projects/stock-system-obras-2.png",
         "/images/projects/stock-system-obras-3.png",
         "/images/projects/stock-system-obras-4.png"
+      ]
+    },
+    {
+      name: "Atenea Eat",
+      description: "Sistema de gestión integral para cafeterías: control de stock e insumos, mapa de mesas en vivo, cobranzas y personal organizado por roles (propietario, empleado).",
+      role: "Desarrollo full-stack",
+      stack: ["React", "TypeScript", "PostgreSQL", "Docker", "Tailwind CSS"],
+      images: [
+        "/images/projects/atenea-eat-1.png",
+        "/images/projects/atenea-eat-2.png",
+        "/images/projects/atenea-eat-3.png",
+        "/images/projects/atenea-eat-4.png",
+        "/images/projects/atenea-eat-5.png"
       ]
     },
     {
