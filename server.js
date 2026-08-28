@@ -78,7 +78,8 @@ function generateFallbackResponse(userMessage) {
   }
   
   if (message.includes('certificación') || message.includes('certificado')) {
-    return `Estoy certificado como QA Engineer (Udemy, 2025) con conocimientos en: ${PORTFOLIO_DATA.certifications[0].skills.join(', ')}.`;
+    const list = PORTFOLIO_DATA.certifications.map(c => `${c.title} (${c.issuer})`).join(', ');
+    return `Cuento con estas certificaciones: ${list}.`;
   }
   
   if (message.includes('skills') || message.includes('habilidades') || message.includes('tecnologías')) {

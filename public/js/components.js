@@ -1,5 +1,28 @@
 // Funciones para renderizar componentes
 
+// Genera el contenido del slot de logo (educación/certificaciones): imagen si hay `logoPath`,
+// con fallback a una inicial si el archivo no existe; o directamente la inicial si no hay logo.
+function logoBadgeMarkup(logoPath, name) {
+  const initial = (name || '?').trim().charAt(0).toUpperCase();
+  const initialBadge = `
+    <div class="w-full h-full rounded-md bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xl" style="${logoPath ? 'display:none;' : ''}">
+      ${initial}
+    </div>
+  `;
+
+  if (!logoPath) return initialBadge;
+
+  return `
+    <img
+      src="${logoPath}"
+      alt="${name}"
+      class="w-full h-full object-contain"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+    />
+    ${initialBadge}
+  `;
+}
+
 // Renderizar contenido About
 function renderAbout() {
   const container = document.getElementById('aboutContent');
@@ -218,7 +241,7 @@ function renderEducation() {
     card.innerHTML = `
       <div class="flex flex-col sm:flex-row gap-6">
         <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-2">
-          <img src="${edu.logo}" alt="${edu.institution}" class="w-full h-full object-contain" />
+          ${logoBadgeMarkup(edu.logo, edu.institution)}
         </div>
         <div class="flex-1">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-1">
@@ -248,7 +271,7 @@ function renderCertifications() {
     card.innerHTML = `
       <div class="flex flex-col sm:flex-row gap-6">
         <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-2">
-          <img src="${cert.logo}" alt="${cert.issuer}" class="w-full h-full object-contain" />
+          ${logoBadgeMarkup(cert.logo, cert.issuer)}
         </div>
         <div class="flex-1">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-1">
@@ -256,10 +279,12 @@ function renderCertifications() {
             <span class="font-mono text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-1 rounded-md w-fit">Exp: ${cert.date}</span>
           </div>
           <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">${cert.issuer}</p>
-          <p class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mb-4">Credential ID: ${cert.id}</p>
-          <div class="flex flex-wrap gap-2">
-            ${cert.skills.map(skill => `<span class="font-mono text-[10px] px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 uppercase">${skill}</span>`).join('')}
-          </div>
+          ${cert.id ? `<p class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mb-4">Credential ID: ${cert.id}</p>` : '<div class="mb-3"></div>'}
+          ${cert.skills.length > 0 ? `
+            <div class="flex flex-wrap gap-2">
+              ${cert.skills.map(skill => `<span class="font-mono text-[10px] px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 uppercase">${skill}</span>`).join('')}
+            </div>
+          ` : ''}
         </div>
       </div>
     `;

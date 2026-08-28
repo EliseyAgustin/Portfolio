@@ -41,12 +41,36 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
 
   certifications: [
     {
+      title: "Play It Safe: Manage Security Risks",
+      issuer: "Google",
+      date: "ago. 2026",
+      id: "GZ4HJNJS1ZOO",
+      skills: [],
+      logo: null
+    },
+    {
+      title: "Foundations of Cybersecurity",
+      issuer: "Google",
+      date: "ago. 2026",
+      id: "VNESX3Q37L61",
+      skills: ["Ciberseguridad", "Seguridad de la información"],
+      logo: null
+    },
+    {
       title: "QA Engineer desde 0 hasta avanzado",
       issuer: "Udemy",
       date: "jun. 2025",
       id: "UC-5cfd0673-a8c2-4d33-941e-eccd051f32d6",
       skills: ["JIRA", "Casos de prueba", "Metodologías Ágiles", "Testing Automation"],
       logo: "/images/logo-udemy.png"
+    },
+    {
+      title: "Python Essentials 1",
+      issuer: "Cisco",
+      date: "mar. 2024",
+      id: null,
+      skills: [],
+      logo: null
     }
   ],
 
