@@ -1,5 +1,6 @@
 // Datos del portafolio — fuente única, consumida por el frontend (script clásico)
 // y por server.js (vía require) para mantener al asistente IA sincronizado.
+// Contenido basado en el CV (public/documents/CV_Agustin_Elisey.pdf).
 //
 // PORTFOLIO_DATA tiene una versión por idioma (es/en) con la misma forma.
 // Los nombres propios (empresas, instituciones, nombres de proyectos, stack
@@ -8,89 +9,111 @@
 
 const PORTFOLIO_DATA = {
   es: {
-    name: "Agustin Elisey Larco",
-    title: "Data Analyst | QA Tester",
-    location: "Buenos Aires, Provincia de Buenos Aires, Argentina",
-    contacts: 48,
-    about: `Como ex Analista de Datos en Shalion, apliqué mis habilidades en capacidad de análisis, Quality Assurance y Testing. Mi experiencia incluye el uso de SQL para validación de datos, documentación de procesos y la identificación y reporte de inconsistencias en datos, todo dentro de entornos ágiles colaborativos.
+    name: "Agustín Elisey",
+    title: "Data Analyst & QA Engineer | SQL, Snowflake & Automatización",
+    location: "Buenos Aires, Argentina",
+    phone: "+54 9 11 3881-3921",
+    email: "agustinelisey22@gmail.com",
+    about: `Data Analyst y QA Engineer con más de 2 años de experiencia en SQL, Snowflake, automatización de procesos y aseguramiento de calidad en entornos de e-commerce. Especializado en el diseño de consultas SQL/Snowflake, automatización de flujos de trabajo con Python y validación de integridad de datos.
 
-Mi formación académica incluye una Licenciatura en Informática por la Universidad Nacional del Oeste, donde también obtuve una Tecnicatura en Tecnologías Web. Estoy certificado en QA Engineer por Udemy y actualmente desarrollo mis conocimientos en automatización de pruebas y metodologías ágiles para brindar soluciones de calidad en el ámbito tecnológico.`,
+Resultados comprobados: 60% de mejora en eficiencia operativa al automatizar la detección de duplicados sobre +6.000 registros mensuales (de 2 días a 12 horas), y 70% menos errores de datos gracias a controles de calidad sistemáticos. Formación en Tecnologías Web e Informática (Universidad Nacional del Oeste), certificaciones en Ciberseguridad (Google) y QA Testing (Selenium, Cypress), y experiencia aplicando Inteligencia Artificial (Claude, Anthropic) para optimizar flujos de trabajo técnicos. Además, desarrollador FullStack en proyectos propios.`,
+
+    stats: [
+      { value: 60, suffix: "%", label: "más de eficiencia operativa al automatizar la detección de duplicados" },
+      { value: 70, suffix: "%", label: "menos errores de datos con controles de calidad sistemáticos" },
+      { value: 6000, prefix: "+", label: "registros mensuales: de 2 días a 12 horas de procesamiento" },
+      { value: 11, suffix: "", label: "personas en el equipo internacional con el que trabajé" }
+    ],
 
     experience: [
       {
+        company: "Atenea Tech",
+        role: "Cofundador & Desarrollador FullStack",
+        type: "Jornada completa",
+        period: "Mar. 2026 - Presente",
+        location: "Remoto",
+        bullets: [
+          "Cofundé Atenea Tech y lideré el desarrollo frontend (React, Tailwind CSS) y backend (Node.js, Express, PostgreSQL) de una suite de productos SaaS: gestión de stock para obras, facturación electrónica con ARCA, gestión de cafeterías y una academia online.",
+          "Definí procesos de control de calidad y validación de datos entre los distintos módulos del ecosistema, y usé Git/GitHub y Docker para versionado y despliegue."
+        ],
+        skills: ["React", "Node.js", "PostgreSQL", "Docker", "Git"]
+      },
+      {
         company: "Shalion",
-        role: "Analista de Datos",
+        role: "Data Analyst",
         type: "Jornada parcial",
-        period: "may. 2024 - feb. 2026",
-        duration: "1 año 9 meses",
-        location: "Provincia de Buenos Aires, Argentina · Híbrido",
-        skills: ["Hojas de cálculo de Google", "SQL", "Análisis de Datos", "Quality Assurance"],
-        logo: "https://picsum.photos/seed/shalion/200/200"
+        period: "May. 2024 - Feb. 2026",
+        location: "Buenos Aires · Híbrido",
+        bullets: [
+          "Automaticé la detección y eliminación de productos y registros duplicados sobre ~6.000 registros mensuales, reduciendo el tiempo de procesamiento de 2 días a 12 horas (aprovechando el ciclo de refresco de 1 hora del sistema) e incrementando la eficiencia operativa en un 60%.",
+          "Diseñé y optimicé consultas SQL y Snowflake para corregir errores de codificación y eliminar datos redundantes, reduciendo el margen de error en un 70% y elevando la integridad de la información.",
+          "Implementé controles de validación y calidad de datos (data quality checks) sobre flujos de e-commerce, garantizando información confiable para la toma de decisiones y la experiencia del cliente.",
+          "Gestioné y prioricé tareas en ClickUp bajo metodologías ágiles, colaborando con un equipo internacional multidisciplinario de 11 personas para asegurar el cumplimiento de plazos y estándares de calidad."
+        ],
+        skills: ["SQL", "Snowflake", "Python", "Data Quality", "ClickUp"]
       }
     ],
 
     education: [
       {
         institution: "Universidad Nacional del Oeste",
-        degree: "Tecnicatura Universitaria en Tecnologías Web",
-        date: "mar. 2023",
-        skills: ["Desarrollo de API", "Web Development", "JavaScript"],
+        degree: "Licenciatura en Informática",
+        date: "Mar. 2020 - Presente",
         logo: "/images/logo-uno.png"
       },
       {
         institution: "Universidad Nacional del Oeste",
-        degree: "Licenciatura en Informática",
-        date: "mar. 2020",
-        skills: ["Gestión de proyectos", "Trabajo en equipo", "Arquitectura de Software"],
+        degree: "Tecnicatura Universitaria en Tecnologías Web",
+        date: "Mar. 2024 - Presente",
         logo: "/images/logo-uno.png"
       }
     ],
 
     certifications: [
-      {
-        title: "Play It Safe: Manage Security Risks",
-        issuer: "Google",
-        date: "ago. 2026",
-        id: "GZ4HJNJS1ZOO",
-        skills: [],
-        logo: "/images/logo-google.svg"
-      },
-      {
-        title: "Foundations of Cybersecurity",
-        issuer: "Google",
-        date: "ago. 2026",
-        id: "VNESX3Q37L61",
-        skills: ["Ciberseguridad", "Seguridad de la información"],
-        logo: "/images/logo-google.svg"
-      },
-      {
-        title: "QA Engineer desde 0 hasta avanzado",
-        issuer: "Udemy",
-        date: "jun. 2025",
-        id: "UC-5cfd0673-a8c2-4d33-941e-eccd051f32d6",
-        skills: ["JIRA", "Casos de prueba", "Metodologías Ágiles", "Testing Automation"],
-        logo: "/images/logo-udemy.png"
-      },
-      {
-        title: "Python Essentials 1",
-        issuer: "Cisco",
-        date: "mar. 2024",
-        id: null,
-        skills: [],
-        logo: "/images/logo-cisco.svg"
-      }
+      { title: "Connect and Protect: Networks and Network Security", issuer: "Google", date: "Sep. 2026", logo: "/images/logo-google.svg" },
+      { title: "Play It Safe: Manage Security Risks", issuer: "Google", date: "Ago. 2026", logo: "/images/logo-google.svg" },
+      { title: "Foundations of Cybersecurity", issuer: "Google", date: "Ago. 2026", logo: "/images/logo-google.svg" },
+      { title: "QA Engineer desde 0 hasta Avanzado", issuer: "Udemy", date: "Jun. 2025", logo: "/images/logo-udemy.png" },
+      { title: "Python Essentials 1", issuer: "Cisco", date: "Mar. 2024", logo: "/images/logo-cisco.svg" }
     ],
 
+    languages: [
+      { name: "Español", level: "Nativo" },
+      { name: "Inglés", level: "Intermedio, lectura técnica avanzada" }
+    ],
+
+    softSkills: ["Atención al detalle", "Pensamiento analítico", "Comunicación", "Trabajo en equipo", "Resolución de problemas", "Adaptabilidad"],
+
     skills: [
-      { name: "SQL", category: "Data & DB" },
-      { name: "JIRA", category: "Tools" },
-      { name: "Resolución de incidencias", category: "QA" },
-      { name: "Casos de prueba", category: "QA" },
-      { name: "Trabajo en equipo", category: "Soft Skills" },
-      { name: "Google Sheets", category: "Tools" },
-      { name: "Agile/Scrum", category: "Process" },
-      { name: "Testing Manual", category: "QA" },
-      { name: "Documentación", category: "Process" }
+      { category: "Análisis de Datos", name: "SQL" },
+      { category: "Análisis de Datos", name: "Snowflake" },
+      { category: "Análisis de Datos", name: "Python" },
+      { category: "Análisis de Datos", name: "Validación e integridad de datos" },
+      { category: "Análisis de Datos", name: "Limpieza y deduplicación" },
+      { category: "Análisis de Datos", name: "Reportes y dashboards" },
+      { category: "QA y Automatización", name: "Diseño de casos de prueba" },
+      { category: "QA y Automatización", name: "Testing manual y automatizado" },
+      { category: "QA y Automatización", name: "Selenium" },
+      { category: "QA y Automatización", name: "Cypress" },
+      { category: "QA y Automatización", name: "Postman" },
+      { category: "QA y Automatización", name: "JIRA" },
+      { category: "Ciberseguridad", name: "Gestión de riesgos de seguridad" },
+      { category: "Ciberseguridad", name: "Seguridad de la información" },
+      { category: "Ciberseguridad", name: "Protección de datos" },
+      { category: "Automatización de procesos", name: "Scripts en Python" },
+      { category: "Automatización de procesos", name: "Automatización de flujos de trabajo" },
+      { category: "Automatización de procesos", name: "Optimización de procesos" },
+      { category: "Desarrollo Web", name: "React" },
+      { category: "Desarrollo Web", name: "Node.js" },
+      { category: "Desarrollo Web", name: "PostgreSQL" },
+      { category: "Desarrollo Web", name: "TypeScript" },
+      { category: "Herramientas", name: "Excel" },
+      { category: "Herramientas", name: "ClickUp" },
+      { category: "Herramientas", name: "Git y GitHub" },
+      { category: "Herramientas", name: "Jenkins" },
+      { category: "Herramientas", name: "Docker" },
+      { category: "Herramientas", name: "Google Workspace" },
+      { category: "IA aplicada", name: "Claude (Anthropic)" }
     ],
 
     projects: [
@@ -145,89 +168,111 @@ Mi formación académica incluye una Licenciatura en Informática por la Univers
   },
 
   en: {
-    name: "Agustin Elisey Larco",
-    title: "Data Analyst | QA Tester",
-    location: "Buenos Aires, Buenos Aires Province, Argentina",
-    contacts: 48,
-    about: `As a former Data Analyst at Shalion, I applied my analytical skills, Quality Assurance and Testing expertise. My experience includes using SQL for data validation, process documentation, and identifying and reporting data inconsistencies, all within collaborative agile environments.
+    name: "Agustín Elisey",
+    title: "Data Analyst & QA Engineer | SQL, Snowflake & Automation",
+    location: "Buenos Aires, Argentina",
+    phone: "+54 9 11 3881-3921",
+    email: "agustinelisey22@gmail.com",
+    about: `Data Analyst and QA Engineer with 2+ years of experience in SQL, Snowflake, process automation and quality assurance in e-commerce environments. Specialized in designing SQL/Snowflake queries, automating workflows with Python and validating data integrity.
 
-My academic background includes a Bachelor's Degree in Computer Science from Universidad Nacional del Oeste, where I also earned a Technical Degree in Web Technologies. I'm certified as a QA Engineer through Udemy and I'm currently developing my skills in test automation and agile methodologies to deliver quality solutions in the tech field.`,
+Proven results: 60% improvement in operational efficiency by automating duplicate detection over 6,000+ monthly records (from 2 days down to 12 hours), and 70% fewer data errors thanks to systematic quality controls. Background in Web Technologies and Computer Science (Universidad Nacional del Oeste), certifications in Cybersecurity (Google) and QA Testing (Selenium, Cypress), and experience applying Artificial Intelligence (Claude, Anthropic) to optimize technical workflows. Also a FullStack developer on personal projects.`,
+
+    stats: [
+      { value: 60, suffix: "%", label: "more operational efficiency by automating duplicate detection" },
+      { value: 70, suffix: "%", label: "fewer data errors through systematic quality controls" },
+      { value: 6000, prefix: "+", label: "monthly records: from 2 days to 12 hours of processing" },
+      { value: 11, suffix: "", label: "people in the international team I worked with" }
+    ],
 
     experience: [
+      {
+        company: "Atenea Tech",
+        role: "Co-founder & FullStack Developer",
+        type: "Full-time",
+        period: "Mar 2026 - Present",
+        location: "Remote",
+        bullets: [
+          "Co-founded Atenea Tech and led the frontend (React, Tailwind CSS) and backend (Node.js, Express, PostgreSQL) development of a SaaS product suite: construction stock management, electronic invoicing with ARCA, coffee shop management and an online academy.",
+          "Defined quality control and data validation processes across the modules of the ecosystem, and used Git/GitHub and Docker for versioning and deployment."
+        ],
+        skills: ["React", "Node.js", "PostgreSQL", "Docker", "Git"]
+      },
       {
         company: "Shalion",
         role: "Data Analyst",
         type: "Part-time",
         period: "May 2024 - Feb 2026",
-        duration: "1 year 9 months",
-        location: "Buenos Aires Province, Argentina · Hybrid",
-        skills: ["Google Sheets", "SQL", "Data Analysis", "Quality Assurance"],
-        logo: "https://picsum.photos/seed/shalion/200/200"
+        location: "Buenos Aires · Hybrid",
+        bullets: [
+          "Automated the detection and removal of duplicate products and records over ~6,000 monthly records, cutting processing time from 2 days to 12 hours (leveraging the system's 1-hour refresh cycle) and raising operational efficiency by 60%.",
+          "Designed and optimized SQL and Snowflake queries to fix encoding errors and remove redundant data, reducing the error margin by 70% and raising information integrity.",
+          "Implemented data validation and quality checks on e-commerce flows, ensuring reliable information for decision-making and customer experience.",
+          "Managed and prioritized tasks in ClickUp under agile methodologies, collaborating with an international multidisciplinary team of 11 people to meet deadlines and quality standards."
+        ],
+        skills: ["SQL", "Snowflake", "Python", "Data Quality", "ClickUp"]
       }
     ],
 
     education: [
       {
         institution: "Universidad Nacional del Oeste",
-        degree: "University Technical Degree in Web Technologies",
-        date: "Mar 2023",
-        skills: ["API Development", "Web Development", "JavaScript"],
+        degree: "Bachelor's Degree in Computer Science",
+        date: "Mar 2020 - Present",
         logo: "/images/logo-uno.png"
       },
       {
         institution: "Universidad Nacional del Oeste",
-        degree: "Bachelor's Degree in Computer Science",
-        date: "Mar 2020",
-        skills: ["Project Management", "Teamwork", "Software Architecture"],
+        degree: "University Technical Degree in Web Technologies",
+        date: "Mar 2024 - Present",
         logo: "/images/logo-uno.png"
       }
     ],
 
     certifications: [
-      {
-        title: "Play It Safe: Manage Security Risks",
-        issuer: "Google",
-        date: "Aug 2026",
-        id: "GZ4HJNJS1ZOO",
-        skills: [],
-        logo: "/images/logo-google.svg"
-      },
-      {
-        title: "Foundations of Cybersecurity",
-        issuer: "Google",
-        date: "Aug 2026",
-        id: "VNESX3Q37L61",
-        skills: ["Cybersecurity", "Information Security"],
-        logo: "/images/logo-google.svg"
-      },
-      {
-        title: "QA Engineer desde 0 hasta avanzado",
-        issuer: "Udemy",
-        date: "Jun 2025",
-        id: "UC-5cfd0673-a8c2-4d33-941e-eccd051f32d6",
-        skills: ["JIRA", "Test Cases", "Agile Methodologies", "Testing Automation"],
-        logo: "/images/logo-udemy.png"
-      },
-      {
-        title: "Python Essentials 1",
-        issuer: "Cisco",
-        date: "Mar 2024",
-        id: null,
-        skills: [],
-        logo: "/images/logo-cisco.svg"
-      }
+      { title: "Connect and Protect: Networks and Network Security", issuer: "Google", date: "Sep 2026", logo: "/images/logo-google.svg" },
+      { title: "Play It Safe: Manage Security Risks", issuer: "Google", date: "Aug 2026", logo: "/images/logo-google.svg" },
+      { title: "Foundations of Cybersecurity", issuer: "Google", date: "Aug 2026", logo: "/images/logo-google.svg" },
+      { title: "QA Engineer desde 0 hasta Avanzado", issuer: "Udemy", date: "Jun 2025", logo: "/images/logo-udemy.png" },
+      { title: "Python Essentials 1", issuer: "Cisco", date: "Mar 2024", logo: "/images/logo-cisco.svg" }
     ],
 
+    languages: [
+      { name: "Spanish", level: "Native" },
+      { name: "English", level: "Intermediate, advanced technical reading" }
+    ],
+
+    softSkills: ["Attention to detail", "Analytical thinking", "Communication", "Teamwork", "Problem solving", "Adaptability"],
+
     skills: [
-      { name: "SQL", category: "Data & DB" },
-      { name: "JIRA", category: "Tools" },
-      { name: "Issue Resolution", category: "QA" },
-      { name: "Test Cases", category: "QA" },
-      { name: "Teamwork", category: "Soft Skills" },
-      { name: "Google Sheets", category: "Tools" },
-      { name: "Agile/Scrum", category: "Process" },
-      { name: "Manual Testing", category: "QA" },
-      { name: "Documentation", category: "Process" }
+      { category: "Data Analysis", name: "SQL" },
+      { category: "Data Analysis", name: "Snowflake" },
+      { category: "Data Analysis", name: "Python" },
+      { category: "Data Analysis", name: "Data validation and integrity" },
+      { category: "Data Analysis", name: "Data cleaning and deduplication" },
+      { category: "Data Analysis", name: "Reports and dashboards" },
+      { category: "QA & Automation", name: "Test case design" },
+      { category: "QA & Automation", name: "Manual and automated testing" },
+      { category: "QA & Automation", name: "Selenium" },
+      { category: "QA & Automation", name: "Cypress" },
+      { category: "QA & Automation", name: "Postman" },
+      { category: "QA & Automation", name: "JIRA" },
+      { category: "Cybersecurity", name: "Security risk management" },
+      { category: "Cybersecurity", name: "Information security" },
+      { category: "Cybersecurity", name: "Data protection" },
+      { category: "Process Automation", name: "Python scripts" },
+      { category: "Process Automation", name: "Workflow automation" },
+      { category: "Process Automation", name: "Process optimization" },
+      { category: "Web Development", name: "React" },
+      { category: "Web Development", name: "Node.js" },
+      { category: "Web Development", name: "PostgreSQL" },
+      { category: "Web Development", name: "TypeScript" },
+      { category: "Tools", name: "Excel" },
+      { category: "Tools", name: "ClickUp" },
+      { category: "Tools", name: "Git & GitHub" },
+      { category: "Tools", name: "Jenkins" },
+      { category: "Tools", name: "Docker" },
+      { category: "Tools", name: "Google Workspace" },
+      { category: "Applied AI", name: "Claude (Anthropic)" }
     ],
 
     projects: [
@@ -282,50 +327,67 @@ My academic background includes a Bachelor's Degree in Computer Science from Uni
   }
 };
 
-// Textos fijos de la interfaz (nav, botones, encabezados, footer, chat, aria-labels).
+// Textos fijos de la interfaz (nav, botones, encabezados, footer, chat, demo, aria-labels).
 const UI_STRINGS = {
   es: {
     nav: { about: "Sobre mí", experience: "Experiencia", projects: "Proyectos", skills: "Skills", contact: "Contacto" },
     hero: {
-      subtitleHtml: 'Data Analyst especializado en\n                <span class="text-emerald-600 dark:text-emerald-400 font-medium">Data Integrity</span> y\n                <span class="text-emerald-600 dark:text-emerald-400 font-medium">Quality Assurance</span>.',
+      line1: "Agustín",
+      line2: "Elisey",
+      sub: "Data Analyst & QA Engineer. Con SQL, Snowflake y Python hago que los datos sean confiables y que el software no falle.",
       downloadCv: "Descargar CV",
-      contact: "Contactar"
+      contact: "Hablemos"
     },
     sections: {
+      stats: "Resultados que se miden",
+      demo: "Así limpio 6.000 registros",
       about: "Sobre mí",
-      projects: "Proyectos Destacados",
-      experience: "Experiencia Laboral",
-      education: "Formación Académica",
-      certifications: "Certificaciones Especializadas",
-      skills: "Habilidades Técnicas"
+      projects: "Proyectos",
+      experience: "Experiencia",
+      education: "Formación",
+      certifications: "Certificaciones",
+      skills: "Habilidades",
+      softSkills: "Habilidades blandas",
+      languages: "Idiomas",
+      assistant: "Preguntale a mi asistente",
+      contact: "Si tus datos importan, hablemos."
+    },
+    demo: {
+      intro: "Una tabla con duplicados, tal como llegan. Ejecutá la consulta y mirá qué queda.",
+      run: "Ejecutar consulta",
+      reset: "Volver a empezar",
+      running: "Ejecutando...",
+      before: "registros",
+      after: "únicos",
+      removed: "duplicados eliminados",
+      colSku: "sku",
+      colName: "producto",
+      colStatus: "estado",
+      dup: "duplicado",
+      ok: "ok",
+      done: "Listo. Lo mismo, pero sobre ~6.000 registros por mes: de 2 días a 12 horas."
     },
     project: {
       previewSoon: "Vista previa próximamente",
       viewGallery: "Ver galería",
       viewMore: "Ver más"
     },
-    cert: { issued: "Exp:", credentialId: "Credential ID:" },
     ai: {
       title: "Asistente Virtual",
+      sub: "Respondo sobre su experiencia, formación, proyectos y skills.",
       placeholder: "Escribí tu consulta...",
       welcome: "¡Hola! Soy el asistente virtual de Agustín. Preguntame sobre su experiencia, formación, proyectos o habilidades técnicas.",
       you: "Tú",
       assistant: "Asistente",
       thinking: "Escribiendo...",
+      send: "Enviar",
       connectionError: "No pude conectar con el asistente. Por favor intentá nuevamente en unos segundos."
     },
     footer: {
-      description: "Portfolio especializado en ingeniería de datos, aseguramiento de calidad y desarrollo de plataformas SaaS.",
-      navHeading: "Navegación",
-      locationHeading: "Ubicación",
       location: "Buenos Aires, Argentina",
-      timezone: "UTC-3:00",
-      copyright: "© 2026 Agustín Elisey Larco. Todos los derechos reservados."
+      copyright: "© 2026 Agustín Elisey. Todos los derechos reservados."
     },
     aria: {
-      linkedin: "LinkedIn",
-      email: "Email",
-      github: "GitHub",
       themeToggle: "Cambiar tema claro/oscuro",
       langToggle: "Cambiar idioma",
       modalClose: "Cerrar",
@@ -338,45 +400,62 @@ const UI_STRINGS = {
   en: {
     nav: { about: "About", experience: "Experience", projects: "Projects", skills: "Skills", contact: "Contact" },
     hero: {
-      subtitleHtml: 'Data Analyst specialized in\n                <span class="text-emerald-600 dark:text-emerald-400 font-medium">Data Integrity</span> and\n                <span class="text-emerald-600 dark:text-emerald-400 font-medium">Quality Assurance</span>.',
+      line1: "Agustín",
+      line2: "Elisey",
+      sub: "Data Analyst & QA Engineer. With SQL, Snowflake and Python I make data reliable and keep software from breaking.",
       downloadCv: "Download CV",
-      contact: "Contact"
+      contact: "Let's talk"
     },
     sections: {
-      about: "About Me",
-      projects: "Featured Projects",
-      experience: "Work Experience",
+      stats: "Results you can measure",
+      demo: "How I clean 6,000 records",
+      about: "About me",
+      projects: "Projects",
+      experience: "Experience",
       education: "Education",
-      certifications: "Specialized Certifications",
-      skills: "Technical Skills"
+      certifications: "Certifications",
+      skills: "Skills",
+      softSkills: "Soft skills",
+      languages: "Languages",
+      assistant: "Ask my assistant",
+      contact: "If your data matters, let's talk."
+    },
+    demo: {
+      intro: "A table with duplicates, as it arrives. Run the query and see what's left.",
+      run: "Run query",
+      reset: "Start over",
+      running: "Running...",
+      before: "records",
+      after: "unique",
+      removed: "duplicates removed",
+      colSku: "sku",
+      colName: "product",
+      colStatus: "status",
+      dup: "duplicate",
+      ok: "ok",
+      done: "Done. The same thing over ~6,000 records a month: from 2 days to 12 hours."
     },
     project: {
       previewSoon: "Preview coming soon",
       viewGallery: "View gallery",
       viewMore: "View more"
     },
-    cert: { issued: "Issued:", credentialId: "Credential ID:" },
     ai: {
       title: "Virtual Assistant",
+      sub: "I answer about his experience, education, projects and skills.",
       placeholder: "Type your question...",
       welcome: "Hi! I'm Agustín's virtual assistant. Ask me about his experience, education, projects or technical skills.",
       you: "You",
       assistant: "Assistant",
       thinking: "Typing...",
+      send: "Send",
       connectionError: "I couldn't connect to the assistant. Please try again in a few seconds."
     },
     footer: {
-      description: "Portfolio focused on data engineering, quality assurance, and SaaS platform development.",
-      navHeading: "Navigation",
-      locationHeading: "Location",
       location: "Buenos Aires, Argentina",
-      timezone: "UTC-3:00",
-      copyright: "© 2026 Agustín Elisey Larco. All rights reserved."
+      copyright: "© 2026 Agustín Elisey. All rights reserved."
     },
     aria: {
-      linkedin: "LinkedIn",
-      email: "Email",
-      github: "GitHub",
       themeToggle: "Toggle light/dark theme",
       langToggle: "Change language",
       modalClose: "Close",

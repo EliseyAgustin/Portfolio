@@ -16,7 +16,7 @@ app.set('trust proxy', 1);
 
 // Headers de seguridad básicos (X-Content-Type-Options, X-Frame-Options, etc.)
 app.use(helmet({
-  contentSecurityPolicy: false // el sitio carga Tailwind/Google Fonts desde CDNs externos
+  contentSecurityPolicy: false // el sitio carga Google Fonts desde un CDN externo
 }));
 
 // Middleware — límite de tamaño de body chico: ni el chat ni el form de contacto lo necesitan grande
