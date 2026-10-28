@@ -12,7 +12,6 @@ const PORTFOLIO_DATA = {
     name: "Agustín Elisey",
     title: "Data Analyst & QA Engineer | SQL, Snowflake & Automatización",
     location: "Buenos Aires, Argentina",
-    phone: "+54 9 11 3881-3921",
     email: "agustinelisey22@gmail.com",
     about: `Data Analyst y QA Engineer con más de 2 años de experiencia en SQL, Snowflake, automatización de procesos y aseguramiento de calidad en entornos de e-commerce. Especializado en el diseño de consultas SQL/Snowflake, automatización de flujos de trabajo con Python y validación de integridad de datos.
 
@@ -171,7 +170,6 @@ Resultados comprobados: 60% de mejora en eficiencia operativa al automatizar la 
     name: "Agustín Elisey",
     title: "Data Analyst & QA Engineer | SQL, Snowflake & Automation",
     location: "Buenos Aires, Argentina",
-    phone: "+54 9 11 3881-3921",
     email: "agustinelisey22@gmail.com",
     about: `Data Analyst and QA Engineer with 2+ years of experience in SQL, Snowflake, process automation and quality assurance in e-commerce environments. Specialized in designing SQL/Snowflake queries, automating workflows with Python and validating data integrity.
 
